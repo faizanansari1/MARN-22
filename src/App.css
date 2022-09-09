@@ -1,10 +1,81 @@
-.App {
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  list-style-type: none;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+:root {
+  --themeBgColor: #0000ffa1;
+}
+.nav-ui {
+  background-color: var(--themeBgColor);
+}
+.nav-ui li {
+  display: inline-block;
+  padding: 10px;
+}
+.nav-ui li a {
+  color: #fff;
+  text-transform: capitalize;
+  font-weight: 500;
+  padding: 5px;
+}
+
+/* register */
+.register {
+  width: 50%;
+  margin: auto;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 50vh;
+}
+.register h1 {
+  text-align: start !important;
+  margin-bottom: 20px;
+}
+.register input {
+  margin-bottom: 16px;
+  margin-left: 36x;
+  padding: 12px 16px;
+  border: 1px solid var(--themeBgColor);
+  outline: none;
+}
+.register button {
+  width: 20%;
+  padding: 8px;
+  margin-left: 36x;
+  outline: none;
+  border: 1px solid var(--themeBgColor);
+  cursor: pointer;
+  font-weight: 500;
+  color: #fff;
+  background-color: var(--themeBgColor);
+  border-radius: 4px;
+}
+
+.already-account {
+  text-align: start;
+  margin-top: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+.already-account > a {
+  font-size: 14px;
+  text-decoration: underline;
+  color: var(--themeBgColor);
+}
+
+.footer-container {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding: 16px;
+  background: var(--themeBgColor);
+  color: #fff;
 }
 
 @media (prefers-reduced-motion: no-preference) {
