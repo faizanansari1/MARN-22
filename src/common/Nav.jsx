@@ -1,28 +1,51 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Nav = () => {
+  const options = [
+    {
+      text: "Products",
+      routePath: "/",
+    },
+    {
+      text: "Add Product",
+      routePath: "/add",
+    },
+
+    {
+      text: "Update Product",
+      routePath: "/update",
+    },
+    {
+      text: "Logout",
+      routePath: "/logout",
+    },
+    {
+      text: "Profile",
+      routePath: "/profile",
+    },
+    {
+      text: "Sign Up",
+      routePath: "/signup",
+    },
+    {
+      text: "login",
+      routePath: "/signin",
+    },
+  ];
   return (
     <div>
       <ul className="nav-ui">
-        <li>
-          <Link to="/">Products</Link>
-        </li>
-        <li>
-          <Link to="/add">Add Product</Link>
-        </li>
-        <li>
-          <Link to="/update">Update Product</Link>
-        </li>
-        <li>
-          <Link to="/logout">Logout</Link>
-        </li>
-        <li>
-          <Link to="/profile">Profile</Link>
-        </li>
-        <li>
-          <Link to="/signup">Sign Up</Link>
-        </li>
+        {options.map((item) => (
+          <li key={item.text}>
+            <NavLink
+              className={({ isActive }) => (isActive ? "active" : "")}
+              to={item.routePath}
+            >
+              {item.text}
+            </NavLink>
+          </li>
+        ))}
       </ul>
     </div>
   );
