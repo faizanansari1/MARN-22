@@ -1,1 +1,1 @@
-// export const getGroups = (state) => state.vendor.;
+export const getLoading = (state) => state.isLoading;

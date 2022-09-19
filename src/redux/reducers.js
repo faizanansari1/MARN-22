@@ -16,6 +16,25 @@ const reducer = (state = initialState, action) => {
     case types.GET_USERS_FAILURE: {
       return { ...state, isLoading: false };
     }
+    case types.REGISTER_USER: {
+      return { ...state, isLoading: true };
+    }
+    case types.REGISTER_USER_SUCCESS: {
+      return { ...state, isLoading: false };
+    }
+    case types.REGISTER_USER_FAILURE: {
+      return { ...state, isLoading: false };
+    }
+
+    case types.SIGNIN_USER: {
+      return { ...state, isLoading: true };
+    }
+    case types.SIGNIN_USER_SUCCESS: {
+      return { ...state, isLoading: false };
+    }
+    case types.SIGNIN_USER_FAILURE: {
+      return { ...state, isLoading: false };
+    }
 
     default:
       return state;

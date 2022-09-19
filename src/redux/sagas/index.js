@@ -16,7 +16,7 @@ function* getUserSaga() {
 }
 
 function* registerUserSaga(data) {
-  const { name, email, password } = data.payload;
+  const { name, email, password, onSuccess } = data.payload;
   try {
     const res = yield call(fetchSaga, "/user/adduser", {
       method: "POST",
@@ -25,6 +25,7 @@ function* registerUserSaga(data) {
     if (res) {
       yield put({ type: types.REGISTER_USER_SUCCESS, payload: res });
       toast.success(res.msg);
+      onSuccess(res);
     }
   } catch (error) {
     // console.log("error>>", error.response.data.error);
@@ -34,9 +35,33 @@ function* registerUserSaga(data) {
   }
 }
 
+function* signinUserSaga(data) {
+  const { email, password, onSuccess } = data.payload;
+  try {
+    const res = yield call(fetchSaga, "/user/signin", {
+      method: "POST",
+      body: { email, password },
+    });
+    if (res) {
+      yield put({ type: types.SIGNIN_USER_SUCCESS, payload: res });
+      toast.success(res.msg);
+      onSuccess(res.msg);
+    }
+  } catch (error) {
+    // onAction(error.response.data.msg);
+    toast.error(
+      error?.response?.data?.error?.message ||
+        error.response.data.msg ||
+        "somthing wrong"
+    );
+    yield put({ type: types.SIGNIN_USER_FAILURE, payload: error });
+  }
+}
+
 function* rootSaga() {
   yield takeLatest(types.GET_USERS, getUserSaga);
   yield takeLatest(types.REGISTER_USER, registerUserSaga);
+  yield takeLatest(types.SIGNIN_USER, signinUserSaga);
 }
 
 export default rootSaga;
