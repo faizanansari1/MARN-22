@@ -4,6 +4,10 @@ export const getUsers = () => ({
   type: types.GET_USERS,
 });
 
+export const getProducts = () => ({
+  type: types.GET_PRODUCTS,
+});
+
 export const registerUser = (data) => ({
   type: types.REGISTER_USER,
   payload: data,

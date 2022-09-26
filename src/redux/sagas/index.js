@@ -1,4 +1,4 @@
-import { takeLatest, put, call, select, all, fork } from "redux-saga/effects";
+import { takeLatest, put, call } from "redux-saga/effects";
 import * as types from "../types";
 import { fetchSaga } from "./helper";
 import { toast } from "react-toastify";
@@ -15,6 +15,21 @@ function* getUserSaga() {
   }
 }
 
+function* getProductSaga() {
+  try {
+    const response = yield call(fetchSaga, "/products");
+    yield put({
+      type: types.GET_PRODUCTS_SUCCESS,
+      payload: response,
+    });
+  } catch (error) {
+    yield put({
+      type: types.GET_PRODUCTS_FAILURE,
+      payload: error,
+    });
+  }
+}
+
 function* registerUserSaga(data) {
   const { name, email, password, onSuccess } = data.payload;
   try {
@@ -28,7 +43,6 @@ function* registerUserSaga(data) {
       onSuccess(res);
     }
   } catch (error) {
-    // console.log("error>>", error.response.data.error);
     toast.error(error?.response?.data?.error?.message || "somthing wrong");
     yield put({ type: types.REGISTER_USER_FAILURE, payload: error });
     toast.error(error);
@@ -48,7 +62,6 @@ function* signinUserSaga(data) {
       onSuccess(res.msg);
     }
   } catch (error) {
-    // onAction(error.response.data.msg);
     toast.error(
       error?.response?.data?.error?.message ||
         error.response.data.msg ||
@@ -60,6 +73,7 @@ function* signinUserSaga(data) {
 
 function* rootSaga() {
   yield takeLatest(types.GET_USERS, getUserSaga);
+  yield takeLatest(types.GET_PRODUCTS, getProductSaga);
   yield takeLatest(types.REGISTER_USER, registerUserSaga);
   yield takeLatest(types.SIGNIN_USER, signinUserSaga);
 }

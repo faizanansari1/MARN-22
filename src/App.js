@@ -10,15 +10,6 @@ function App() {
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>
-        <ToastContainer
-          position="bottom-center"
-          hideProgressBar={false}
-          autoClose={1000}
-          // autoClose={false}
-          // newestOnTop={true}
-          draggable={false}
-          rtl={false}
-        />
         <Main />
       </PersistGate>
     </Provider>
